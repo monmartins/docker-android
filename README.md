@@ -142,7 +142,7 @@ docker run -it --rm \
   -p 5554:5554 \
   -p 5555:5555 \
   -p 37043:37043 \
-  ramonmartins886/docker-android:latest
+  rootrmc/docker-android:latest
 
 ```
 
