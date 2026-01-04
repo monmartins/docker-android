@@ -18,6 +18,8 @@ A reproducible **Android dynamic analysis lab** running a **headless Android Emu
 
 This setup is designed for **rooted dynamic analysis, tracing, and instrumentation** with **ADB access exposed to the host**, plus optional UI access via **scrcpy**.
 
+![Demo](assets/demo.gif)
+
 ---
 
 ## 📚 Documentation
