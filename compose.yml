@@ -1,0 +1,41 @@
+
+services:
+  android-emulator:
+    init: true
+    # command: ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
+    stop_grace_period: 60s
+    image: rootrmc/docker-android:emulator_14
+    container_name: android-emulator
+    tty: true
+    stdin_open: true
+    ports:
+      - "5554:5554"
+      - "5555:5555" # ADB via socat -> 127.0.0.1:5558
+      - "37043:37043"  # porta do frida-server (via adb forward pra localhost)
+
+    environment:
+      EMULATOR_NAME: "nexus"
+      ANDROID_SDK_ROOT: "/opt/android" 
+      ANDROID_HOME: "/opt/android"  
+      ANDROID_API_LEVEL: "34" 
+      ANDROID_BUILD_TOOLS: "34.0.0" 
+      EMULATOR_PORT: "5558" 
+      FRIDA_VERSION: "17.2.16" 
+      FRIDA_ARCH: "android-x86_64" 
+      FRIDA_PORT: "27042" 
+      FRIDA_SERVER_PATH: "/opt/frida/frida-server" 
+      MAGISK_DIR: "/opt/magisk" 
+      MAGISK_GIT: "https://github.com/topjohnwu/Magisk" 
+      MAGISK_REF: "v30.6" 
+      QBDI_TAG: "v0.12.0" 
+      QBDI_DIR: "/opt/qbdi"
+      PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/android/cmdline-tools/latest/bin:/opt/android/emulator:/opt/android/platform-tools
+    devices:
+      - "/dev/kvm:/dev/kvm"
+    volumes:
+      # If you want install apps in boot of emulator
+      - ./apps:/opt/apps 
+      # If you want bind a volume like sdcard in emulator TODO
+      #- ./volume:/opt/volume
+    restart: unless-stopped
+
